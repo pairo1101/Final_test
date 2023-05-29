@@ -1,0 +1,104 @@
+#%RAML 1.0
+title: fs-customer-xapi
+baseUri: access.mynt.xyz/gconnect/customer
+version: 1.0
+protocols:
+  - HTTPS
+
+securitySchemes:
+  oauth_2_0:
+    description: |
+      OAuth 2.0.
+    type: OAuth 2.0
+    describedBy:
+      headers:
+        Authorization:
+          description: |
+            Used to send a valid OAuth 2 bearer token.
+          type: string
+          example: |
+            Bearer YbsWeTAqqWdgMDCW7BaNfZF4ZkA8wGKm
+      responses:
+        401:
+          description: |
+            Bad or expired token.
+          body:
+            application/json: |
+              {
+                "error": "invalid_token",
+                "error_description": "The access token is invalid or has expired"
+              }
+    settings:
+      accessTokenUri: https://access.mynt.xyz/gconnect/oauth2/token
+      authorizationGrants: client_credentials
+
+types:
+  reliance-error-response: !include types/reliance-error-response.raml
+
+traits:
+  common-error-response: !include traits/common-error-response.raml
+
+/login:
+  get:
+    description: For KYC Sharing Request, a redirect link to GCash will be provided
+    securedBy: [oauth_2_0]
+    is: [common-error-response]
+    headers:
+      X-Tracker:
+        example: "c9fdc98a-3dbb-455a-947e-00784800e089"
+        type: string
+      client_id:
+        example: "gb1f1e35b6234edba927336a786a9e45"
+        type: string
+    queryParameters:
+      callbackUrl:
+        description: partner url to send back response
+        example: "https://partner-callback.com/"
+        type: string
+      sessionToken: 
+        description: token used to map response to a specific request
+        example: "f3f0-fb22-4488-11ed"
+        type: string
+    responses:
+      303:
+        description: Redirect to login page
+
+# /customers:
+#   get:
+#     description: Consult Customer Qualification. Created for mock purposes since its difficult to mock a callback model.
+#     securedBy: [oauth_2_0]
+#     headers:
+#       client_id:
+#         example: "test"
+#         type: string
+#         required: true
+#     queryParameters:
+#       token:
+#         type: string
+#         example: "987654321"
+#         required: true
+#       sessionToken:
+#         type: string
+#         example: "abcdefghij123456789"
+#         required: true
+#     responses:
+#       200:
+#         body:
+#           application/json:
+#             example: {
+#     "data": {
+#         "encrypted_data": "JiSH6EVPER5i4e+yn/IpOSEbc59yFd6RtSL/o0tNvHhvfUDP5bjPKyFCwsHKztLxkoJVjDen+XWBTtW8V0bpGLn/kx4miaSPZmiGsaHT3PzX9c10Gqm3hmpErC6qL4cfblzQ/JlflKlRCPMPb1CG6lHMv9DIiQLW/t/aR0tskZFpCrP0ao3y5sjHEc2Nw1yLzl2RFI/fX2k/c2+ZoIV7KoUnBS6HPjNKFpBPYtM4BWUVlw5xUTI/w09KECpfPhBCqH3gDynzV4PoH/Q7jB5VZietgSm0sPFu4EfifXiDKqQVLXhDM8tlj3lNL2l+s/8ZoDKerTyvIaVkg8psyY7y/3qer5KVQ+hXpa6Hbx26DDTclPTPTwru18Zq6hQKegSxG1rGFgvF/YSFPBL4OBQr313B7i3PAZeuwNaShaqKxm+urMTWDr1/a94Li8qLbQB+pTV9Xvng4/bUg9JiXuY0X7aq2vYRRPqn8OAGku3qnNswW/Ptj9wGVfHmTICfyu3MnQ07Q9M018PWEuT+9tRatXGydvdVdJVGu4whyp7kzIHd8FhMRVZJ2k2qB4/CaCkPpqI6BU9jahvxlM5qMrcOCvh4h6GjwfbTIsoaqJamHh77nQYOy09aFOlot0pMHzjdnJaFZDvFmhJh2qGicf7UPrkwjwhkLX+kx3YVRzzg8jcqmrECAAQhrHwb8M0Nzu4x1uajoNUFbbJchU9IcIkdgyrnTSSEbn1L+6KqlorVtri2iSt1hqW0yWMpG4MRwTi0+XEh0EPg+PMRuwQfn04uw9UpvUXUNNF1ZHulvIhfd42fqSVWnMOPi16FRUrkJfpy9tnaKrVQPfh/2HTKwwqlh22h6ierQFwAs3pea3K5p8CcQ9EOtbGdf7dMerwcsNmWbx+3k82nsPnKf5yRwuF8kzAzyDBYfQWDLYomqVSG59w2ECnxrtiKiOJgiIxffQiaws2dyqCxJ0MFNNxo3W3TA24bnMSfzEbsSwKy807Ta8zpOWjcZKYwvjMyOogEW61U0gNWzf2YxZ07MBS0xEbEFZwz01/LZ6ksZZgXsHhWBqbzQchJLkZSfy8T5yryfUGSYcK2OwF1LTvchAEJocaRJTXK48MEL7jDfhlIYGOn2xg=",
+#         "iv": "0Ywo9Wk8PwxUSNUk2eSCYw=="
+#     },
+#     "signature": "DU2LLIXM6ojvsTEugEFQaI0UTN4FmR6H1Uyw1CD5maAHmeOSj+6Je2MZgV5NSDJi4XY7cwGBsKM/ncLtyAnfNVQZW2wAlGti5ifmEJcRXdSZNYa0d34GETthhAYrHpthK7r/bTW+O+KrgrkaYQhFCRrxYHkvhcEdph9FIYVMEpE="
+# }
+#       400:
+#         description: Bad Request.
+#         body:
+#           application/json:
+#             example:
+#               {
+#                 "code": "DP0100000000001",
+#                 "message": "Bad Request"
+#               }
+            

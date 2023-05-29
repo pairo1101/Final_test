@@ -1,0 +1,207 @@
+/* Reset default margin and padding for all elements */
+body, h1, h2, p, a {
+    margin: 0;
+    padding: 0;
+}
+  
+  /* Set font and color for body text */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding-top: 110px;
+    
+    
+}
+  
+  /* Set background and spacing for header */
+.header {
+    background-color: #f7f7f7;
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    height: 60px;
+    top: 0;
+}
+  
+  /* Style for navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    height: 60px;
+}
+  
+  /* Style for logo */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+  
+  /* Style for navigation links */
+.nav-links {
+    list-style-type: none;
+    display: flex;
+}
+  
+  .nav-links li {
+    margin-right: 45px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+  
+.nav-links li a {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #154051;
+    font-size: 16px;
+    text-decoration: none;
+    margin-right: 10px;
+    
+  }
+  
+.nav-links li a:hover {
+    color: #242449;
+}
+.bookbtn{
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 48px;
+    width: 110px;
+    border: none;
+    outline: none;
+    background: #4720b7;
+    background-size: 200%;
+    border-radius: 5000px;
+}
+  .bookbtn:hover{
+  background-color: rgb(28, 128, 228);
+}
+  
+  .nav-links .bookbtn{
+    color: aliceblue;
+    font-size: 15px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+}
+
+.ht1{
+    font-size: 45px;
+    text-transform:uppercase;
+    color: #000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.dest{
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center
+}
+
+.des a{
+    margin-left: 568px;
+}
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+body{
+	font-family: 'Poppins', sans-serif;
+}
+
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+ul{
+	list-style: none;
+}
+.footer{
+	background-color: #242449;
+    padding: 70px 0;
+    margin-top: 100px;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #e91e63;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #ffffff;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}

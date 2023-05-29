@@ -1,0 +1,205 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "fs-customer-xapi",
+    "version": "1.0"
+  },
+  "host": "access.mynt.xyz",
+  "basePath": "/gconnect/customer",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/login": {
+      "get": {
+        "description": "For KYC Sharing Request, a redirect link to GCash will be provided",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "callbackUrl",
+            "description": "partner url to send back response",
+            "required": true,
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "sessionToken",
+            "description": "token used to map response to a specific request",
+            "required": true,
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "X-Tracker",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "required": true,
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "303": {
+            "description": "Redirect to login page"
+          },
+          "400": {
+            "description": "400 Bad Request response status code indicates that the server cannot or will not process the request due to something that is perceived to be a client error (for example, malformed request syntax, invalid request message framing, or deceptive request routing).\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/reliance-error-response"
+            }
+          },
+          "401": {
+            "description": "401 Unauthorized response status code indicates that the client request has not been completed because it lacks valid authentication credentials for the requested resource.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "x-amf-examples": {
+                "invalid-token": {
+                  "error": "invalid_token",
+                  "error_description": "The access token is invalid or has expired"
+                },
+                "invalid-client": {
+                  "error": "Invalid Client"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "403 Forbidden response status code indicates that the server understands the request but refuses to authorize it.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "example": {
+                "message": "You cannot consume this service"
+              }
+            }
+          },
+          "404": {
+            "description": "404 Not Found response status code indicates that the server cannot find the requested resource.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/reliance-error-response"
+            }
+          },
+          "405": {
+            "description": "405 Method Not Allowed response status code indicates that the server knows the request method, but the target resource doesn't support this method.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/reliance-error-response"
+            }
+          },
+          "422": {
+            "description": "422 Unprocessable Entity response status code indicates that the server understands the content type of the request entity, and the syntax of the request entity is correct, but it was unable to process the contained instructions.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/reliance-error-response"
+            }
+          },
+          "500": {
+            "description": "500 Internal Server Error server error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.\n",
+            "x-amf-mediaType": "application/json",
+            "schema": {
+              "$ref": "#/definitions/reliance-error-response"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth_2_0": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "reliance-error-response": {
+      "x-amf-examples": {
+        "example_2": {
+          "header": "Something went wrong.",
+          "code": "KRX0100000000002",
+          "message": "Internal Server Error."
+        },
+        "amf_example_1": {
+          "header": "Something went wrong.",
+          "code": "KRX0100000000001",
+          "message": "Resource not found."
+        },
+        "example_1": {
+          "header": "Something went wrong.",
+          "code": "KRX0100000000001",
+          "message": "Not Acceptable."
+        },
+        "amf_example_2": {
+          "header": "Something went wrong.",
+          "code": "KRX0100000000001",
+          "message": "Bad Request."
+        },
+        "example_0": {
+          "header": "Something went wrong.",
+          "code": "KRX0100000000001",
+          "message": "Method not allowed."
+        }
+      },
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "header",
+        "code",
+        "message"
+      ],
+      "properties": {
+        "header": {
+          "description": "short description of the error",
+          "example": "Something went wrong.",
+          "type": "string"
+        },
+        "code": {
+          "description": "response code",
+          "type": "string"
+        },
+        "message": {
+          "description": "additional description/remarks",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "oauth_2_0": {
+      "type": "oauth2",
+      "description": "OAuth 2.0.\n",
+      "x-amf-describedBy": {
+        "headers": {
+          "Authorization": {
+            "description": "Used to send a valid OAuth 2 bearer token.\n",
+            "type": "string"
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Bad or expired token.\n",
+            "body": {
+              "application/json": {
+                "type": "any"
+              }
+            }
+          }
+        }
+      },
+      "tokenUrl": "https://access.mynt.xyz/gconnect/oauth2/token",
+      "scopes": {
+        "*": ""
+      },
+      "x-amf-settings": {
+        "authorizationGrants": [
+          "client_credentials"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+#%RAML 1.0 Trait
+
+responses:
+  400:
+    description: |
+      400 Bad Request response status code indicates that the server cannot or will not process the request due to something that is perceived to be a client error (for example, malformed request syntax, invalid request message framing, or deceptive request routing).
+    body:
+      application/json:
+        type : reliance-error-response
+        example: !include ../examples/reliance-error-response-400.json
+  401:
+    description: |
+      401 Unauthorized response status code indicates that the client request has not been completed because it lacks valid authentication credentials for the requested resource.
+    body:
+      application/json:
+        examples: 
+          invalid-token: !include ../examples/reliance-error-response-401-invalid-token.json
+          invalid-client: !include ../examples/reliance-error-response-401-invalid-client.json
+  403:
+    description: |
+      403 Forbidden response status code indicates that the server understands the request but refuses to authorize it.
+    body:
+      application/json:
+        example: !include ../examples/reliance-error-response-403.json
+  404:
+    description: |
+      404 Not Found response status code indicates that the server cannot find the requested resource.
+    body:
+      application/json:
+        type : reliance-error-response
+        example: !include ../examples/reliance-error-response-404.json
+  405:
+    description: |
+      405 Method Not Allowed response status code indicates that the server knows the request method, but the target resource doesn't support this method.
+    body:
+      application/json:
+        type : reliance-error-response
+        example: !include ../examples/reliance-error-response-405.json
+  422:
+    description: |
+      422 Unprocessable Entity response status code indicates that the server understands the content type of the request entity, and the syntax of the request entity is correct, but it was unable to process the contained instructions.
+    body:
+      application/json:
+        type : reliance-error-response
+        example: !include ../examples/reliance-error-response-422.json
+  500:
+    description: |
+      500 Internal Server Error server error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+    body:
+      application/json:
+        type : reliance-error-response
+        example: !include ../examples/reliance-error-response-500.json

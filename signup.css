@@ -1,0 +1,81 @@
+*{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    }
+    body{
+        
+        background: whitesmoke;
+    
+    }
+    form{
+        background: whitesmoke;
+        width: 412px;
+        height: 600px;
+        padding: 100px 50px;
+        position: absolute;
+        left: 50%;
+        top: 42%;
+        transform: translate(-50%, -50%);
+    }
+    h1{
+        text-align: center;
+        margin-bottom: 45px;
+        color: #281A39;
+        font-size: 48px;
+        width: 320px;
+        height: 48px;
+        
+    }
+    .textBoxdiv{
+        border-bottom: 2px solid #626262;
+        position: relative;
+        margin: 35px 0;
+    }
+    .textBoxdiv input{
+        background: none;
+        border: none;
+        outline: none;
+        width: 320px;
+        color: #626262;
+        height: 30px;
+        font-size: 20px;
+        padding: 2%;
+    }
+    .signBtn{
+        height: 48px;
+        width: 320px;
+        border: none;
+        outline: none;
+        background: linear-gradient(to right top, #ee00ff,#00ccff);
+        background-size: 200%;
+        color: white;
+        font-size: 16px;
+        
+    }
+    .signBtn:hover{
+        background-position: right;
+        font-size: 17px;
+    }
+    .logp{
+        color: #ea0808;
+        margin-top: 15px;
+        text-align: center;
+    }
+    .logp a{
+        color: #4720B7;
+        
+    }
+    ::placeholder{
+        color: #626262;
+        font-size: 16px;
+    
+    }
+    p{
+        margin-top: 35px;
+        text-align: center;
+        color: #281A39;
+        font-size: 17px;
+    }
